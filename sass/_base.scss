@@ -1,0 +1,76 @@
+// COLOR SASS VARIABLES
+$color-primary: #011b2a;
+$color-primary-dark: #083358;
+
+$color-secondary: #90b77d;
+
+$color-grey-light-1: #f9f7f6;
+$color-grey-light-2: #aaa;
+
+$color-grey-dark-1: #57a6a1;
+$color-grey-dark-2: #344c64;
+
+// FONT VARIABLES
+$font-primary: "Nunito", sans-serif;
+$font-display: "Josefin Sans", sans-serif;
+
+// RESPONSIVE BREAKPOINT - theo Tailwindcss
+$bg-largest: 80rem; // 1280px
+$bg-large: 64rem; // 1024px
+$bg-medium: 48rem; // (768px)
+$bg-small: 40rem; // (640px)
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; // 10/16px = 62.5% -> 1 rem == 10px
+
+  @media only screen and (max-width: $bg-largest) {
+    font-size: 50%;
+  }
+}
+
+body {
+  font-family: $font-primary;
+  color: $color-primary-dark;
+  font-weight: 300;
+
+  line-height: 1.6;
+}
+
+.container {
+  display: grid;
+
+  grid-template-rows: 80vh min-content 40vw repeat(3, min-content);
+
+  grid-template-columns:
+    [sidebar-start] 8rem [sidebar-end full-start] minmax(6rem, 1fr)
+    [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end])
+    [center-end] minmax(6rem, 1fr) [full-end];
+
+  // (REBUILD GRID LAYOUT - CHANGE SIDEBAR POSITION)
+  @media only screen and (max-width: $bg-large) {
+    // change sidebar to row
+    grid-template-rows: 6rem 80vh min-content 40vw repeat(3, min-content);
+
+    grid-template-columns:
+      [full-start] minmax(6rem, 1fr)
+      [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end])
+      [center-end] minmax(6rem, 1fr) [full-end];
+  }
+
+  @media only screen and (max-width: $bg-medium) {
+    // change sidebar to row
+    grid-template-rows: 6rem calc(100vh - 6rem) min-content min-content min-content repeat(
+        3,
+        min-content
+      );
+  }
+}
